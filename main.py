@@ -33,7 +33,7 @@ while True:
             time.sleep(2)
             k.release_key('w')
         elif '一直跑' in control:
-
+            k.press_key('w')
         else:
             pass
     else:
