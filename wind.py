@@ -14,7 +14,7 @@ class MainWindow(wx.Frame):
     """We simply derive a new class of Frame."""
 
     def __init__(self, parent, title):
-        wx.Frame.__init__(self, parent, title=title, size=(200, 200))
+        wx.Frame.__init__(self, parent, title=title, size=(200, 100), pos=(0, 0))
         self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)
         self.SetWindowStyle(wx.STAY_ON_TOP)
         self.Show(True)
