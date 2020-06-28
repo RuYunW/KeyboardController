@@ -3,9 +3,11 @@ import logging
 from pykeyboard import *
 import time
 from funcs import run_all_time
+from wind import MyApp
 
+app=MyApp()
 logging.basicConfig(level=logging.DEBUG)
-k = PyKeyboard()
+k = PyKeyboard()  # ?
 
 while True:
     r = sr.Recognizer()
@@ -41,3 +43,5 @@ while True:
 
     logging.info('end')  # 退出登录
 
+
+app.MainLoop()
