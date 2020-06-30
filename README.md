@@ -13,7 +13,7 @@
 |SpeechRecognition|3.8.1|语音识别| 
 |PyAudio|0.2.11|声音采集|
 |pyHook|1.5.1|PyAudio环境要求| 
-|pocketsphinx|0.1.15|CMU开发的语音识别器，向CMUSphinx提供支持|
+|pocketsphinx|0.1.15|向CMUSphinx提供支持|
 |winiobinary|0.0.6|驱动级别键盘请求|
 |wxPython|4.1.0|Windows桌面应用|
 |一把ps/2接口的键盘|-|Pywinio需求|
