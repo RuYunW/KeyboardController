@@ -5,14 +5,12 @@ from win32api import keybd_event
 from win32con import KEYEVENTF_KEYUP
 import time
 from threading import Thread
-from kb import key_press, key_down, key_up
+from kb import key_press, key_down, key_up, SPkey_down, SPkey_up
 
 logging.basicConfig(level=logging.DEBUG)
-# k = PyKeyboard()
 
 
 def keyboard_controller(frame):
-    k = PyKeyboard()
     while True:
         r = sr.Recognizer()
         mic = sr.Microphone()  # 麦克风
@@ -46,21 +44,37 @@ def keyboard_controller(frame):
             elif '向后转' in control:
                 key_press(0x1F, 0.1)  # S * 0.1
 
-            elif '向前走' or '前进' in control:
+            elif '向前走' in control:
                 key_press(0x11, 1)  # W * 1.0
 
             elif '一直跑' in control:
-                key_press(0x11, 3)  # W * 3.0
+                key_down(0x11)  # W * 3.0
+                time.sleep(0.5)
+                key_up(0x11)
+                key_down(0x11)  # W
+                time.sleep(0.5)
+                key_up(0x11)
+                key_down(0x11)  # W
+                time.sleep(0.5)
+                key_up(0x11)
+                key_down(0x11)  # W
+                time.sleep(0.5)
+                key_up(0x11)
+                key_down(0x11)  # W
+                time.sleep(0.5)
+                key_up(0x11)
+                key_down(0x11)  # W
+                time.sleep(0.5)
+                key_up(0x11)
+
+            elif '后退' in control:
+                key_press(0x1F, 1)  # S
 
             elif '向前跳' in control:
-                key_down(0x11)  # W down
-                key_down(0x39)  # Space down
-                time.sleep(0.5)
-                key_up(0x11)  # W up
-                key_up(0x39)  # Space up
+                key_down(0x11)  # W
+                key_press(0x39, 0.5)  # space
+                key_up(0x11)
 
-            else:
-                pass
         else:
             continue
         logging.info('end')  # 退出登录
