@@ -1,11 +1,14 @@
 import speech_recognition as sr
 import logging
 from pykeyboard import *
+from win32api import keybd_event
+from win32con import KEYEVENTF_KEYUP
 import time
 from threading import Thread
+from kb import key_press, key_down, key_up
 
 logging.basicConfig(level=logging.DEBUG)
-k = PyKeyboard()
+# k = PyKeyboard()
 
 
 def keyboard_controller(frame):
@@ -29,17 +32,33 @@ def keyboard_controller(frame):
             frame.control.AppendText(control + '\n')
 
             if '向左转' in control:
-                k.tap_key('a')
+                key_press(0x1E, 0.1)  # A * 0.1
+
+            elif '向左走' in control:
+                key_press(0x1E, 1)  # A * 1.0
+
             elif '向右转' in control:
-                k.tap_key('d')
+                key_press(0x20, 0.1)  # D * 0.1
+
+            elif '向右走' in control:
+                key_press(0x20, 1)  # D * 1.0
+
             elif '向后转' in control:
-                k.tap_key('s')
-            elif '前进' in control:
-                for i in range(1000):
-                    k.press_key('w')  # 按住 W 键
-                k.release_key('w')
+                key_press(0x1F, 0.1)  # S * 0.1
+
+            elif '向前走' or '前进' in control:
+                key_press(0x11, 1)  # W * 1.0
+
             elif '一直跑' in control:
-                k.press_key('w')
+                key_press(0x11, 3)  # W * 3.0
+
+            elif '向前跳' in control:
+                key_down(0x11)  # W down
+                key_down(0x39)  # Space down
+                time.sleep(0.5)
+                key_up(0x11)  # W up
+                key_up(0x39)  # Space up
+
             else:
                 pass
         else:
